@@ -98,12 +98,12 @@
 </tbody>
 </table>
     
+<div class="d-flex justify-content-center">
+    <button class="btn btn-primary" href = "http://localhost/ClayHistoryMuseum/CalebGlen/BackendEndpoints/createData.php"> add data </button>
+</div>
 
 <div class="d-flex justify-content-center">
     <img src="Mulberry.png" usemap="#image-map" class="m-5">
-    <a href = "http://localhost/ClayHistoryMuseum/CalebGlen/BackendEndpoints/createData.php">
-        <button class="btn btn-primary"> add data </button>
-    </a>
 </div>
 
 <map name="image-map">
