@@ -1,38 +1,51 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Map</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 </head>
+
 <body>
     <div class="form-group d-flex justify-content-center">
-        <label for="inputSearch" class="mb-0" style="position: absolute; font-size: 20px;">Search by Name or Type of Deed: </label>
+        <label for="inputSearch" class="mb-0" style="position: absolute; font-size: 20px;">Search by Name: </label>
     </div>
 
     <div class="form-group d-flex justify-content-center">
         <input class="form-control mt-4" id="inputSearch" name="Seach" placeholder="Search" style="width: 300px;">
         <button class="m-2 mt-4 btn" onclick="searchString()"> search </button>
-      </div>
-
-      <div class="form-group d-flex justify-content-center">
-      <label for="inputNumber" class="mb-0" style="position: absolute; font-size: 20px;">Search by Township and Range: </label>
-
     </div>
-      <div class="form-group d-flex justify-content-center">
+
+    <div class="form-group d-flex justify-content-center">
+        <label for="inputType" class="mb-0" style="position: absolute; font-size: 20px;">Search by Type of Deed: </label>
+    </div>
+
+    <div class="form-group d-flex justify-content-center">
+        <input class="form-control mt-4" id="inputType" name="Seach" placeholder="Search" style="width: 300px;">
+        <button class="m-2 mt-4 btn" onclick="searchType()"> search </button>
+    </div>
+
+    <div class="form-group d-flex justify-content-center">
+        <label for="inputNumber" class="mb-0" style="position: absolute; font-size: 20px;">Search by Township and Range:
+        </label>
+    </div>
+    <div class="form-group d-flex justify-content-center">
         <label for="inputTownship" class="mb-0 mt-4 mr-3" style="font-size: 20px;">Township: </label>
-        <input type="number" class="form-control mt-4" id="inputTownship" name="Seach" placeholder="Search" style="width: 100px;">
+        <input type="number" class="form-control mt-4" id="inputTownship" name="Seach" placeholder="Search"
+            style="width: 100px;">
         <label for="inputRange" class="ml-2 mb-0 mt-4 mr-3" style="font-size: 20px;">Range: </label>
-        <input type="number" class="form-control mt-4" id="inputRange" name="Seach" placeholder="Search" style="width: 100px;">
+        <input type="number" class="form-control mt-4" id="inputRange" name="Seach" placeholder="Search"
+            style="width: 100px;">
         <button class="m-2 mt-4 btn" onclick="searchNumber()"> search </button>
-      </div>
-      
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">id</th>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
                 <th scope="col">Date</th>
                 <th scope="col">Type</th>
                 <th scope="col">Book</th>
@@ -51,81 +64,98 @@
                 <th scope="col">BLK</th>
                 <th scope="col">ADDITION</th>
                 <th scope="col">CITY</th>
-          
-              </tr>
-              </thead>
-              <tbody id="tb">
-              </tbody>
-              </table>
-<script> 
-function getData(tsp, rge) {
-    fetch("http://localhost/ClayHistoryMuseum/CalebGlen/BackendEndpoints/map.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        },
-        body: `tsp=${tsp}&rge=${rge}`
-    }).then((response) => response.text())
-      .then((res) => (document.getElementById("tb").innerHTML = res))
-}
-function searchString() {
-    const value = document.getElementById("inputSearch").value
-    fetch("http://localhost/ClayHistoryMuseum/CalebGlen/BackendEndpoints/searchString.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        },
-        body: `value=${value}`
-    }).then((response) => response.text())
-      .then((res) => (document.getElementById("tb").innerHTML = res))
-}
 
-function searchNumber() {
-    const township = document.getElementById("inputTownship").value
-    const range = document.getElementById("inputRange").value
-    fetch("http://localhost/ClayHistoryMuseum/CalebGlen/BackendEndpoints/searchNumber.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        },
-        body: `tsp=${township}&rge=${range}`
-    }).then((response) => response.text())
-      .then((res) => (document.getElementById("tb").innerHTML = res))
-    }
-</script>
-
-<div class="d-flex justify-content-center">
-    <button class="btn btn-primary" href = "http://localhost/ClayHistoryMuseum/CalebGlen/BackendEndpoints/createData.php"> add data </button>
-</div>
-
-<div class="d-flex justify-content-center">
-    <img src="clayCountyMap.jpg" usemap="#image-map">
-</div>
+            </tr>
+        </thead>
+        <tbody id="tb">
+        </tbody>
+    </table>
+    <script>
+        function getData(tsp, rge) {
+            fetch("http://localhost/ClayHistoryMuseum/CalebGlen/BackendEndpoints/map.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+                },
+                body: `tsp=${tsp}&rge=${rge}`
+            }).then((response) => response.text())
+                .then((res) => (document.getElementById("tb").innerHTML = res))
+        }
+        function searchString() {
+            const value = document.getElementById("inputSearch").value
+            fetch("http://localhost/ClayHistoryMuseum/CalebGlen/BackendEndpoints/searchName.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+                },
+                body: `value=${value}`
+            }).then((response) => response.text())
+                .then((res) => (document.getElementById("tb").innerHTML = res))
+        }
+        function searchType() {
+            const value = document.getElementById("inputType").value
+            fetch("http://localhost/ClayHistoryMuseum/CalebGlen/BackendEndpoints/searchType.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+                },
+                body: `value=${value}`
+            }).then((response) => response.text())
+                .then((res) => (document.getElementById("tb").innerHTML = res))
+        }
 
 
-<map name="image-map" class="map">
-    <area alt="Mulberry" title="Mulberry" href="http://localhost/ClayHistoryMuseum/CalebGlen/map/counties/mulberry.php" coords="46,104,230,107,232,221,263,232,273,242,268,262,273,274,267,283,277,291,47,290,48,234" shape="poly">
-    <area alt="Garfield" title="Garfield" onclick="getData(6, 3)" coords="357,107,537,283" shape="rect">
-    <area alt="Goshen" title="Goshen" onclick="getData(6, 4)" coords="540,105,724,285" shape="rect">
-    <area alt="Highland" title="Highland" onclick="getData(7, 4)" coords="601,289,723,567" shape="rect">
-    <area alt="Sherman" title="Sherman" onclick="getData(6, 2)" coords="234,106,355,107,355,286,415,290,415,378,279,377,273,357,296,349,283,333,274,329,272,320,282,319,295,315,283,302,283,286,268,280,277,271,270,256,274,237,265,228,236,222,236,163" shape="poly">
-    <area alt="Hayes" title="Hayes" onclick="getData(7, 3)" coords="419,291,598,471" shape="rect">
-    <area alt="Clay Center South" title="Clay Center South" onclick="getData(8, 3)" coords="478,477,598,479,597,678,564,669,542,658,531,636,501,608,496,571,479,551" shape="poly">
-    <area alt="Clay Center North" title="Clay Center North" onclick="getData(7, 2)" coords="267,380,413,383,415,473,476,475,476,550,472,568,443,553,422,529,410,535,394,545,371,537,366,510,365,494,367,475,353,481,344,485,334,484,323,478,317,469,324,461,315,452,304,451,313,439,307,422,300,412,289,418,274,414,277,396,267,389" shape="poly">
-    <area alt="Bloom" title="Bloom" onclick="getData(7, 1)" coords="51,292,282,290,280,303,288,308,287,317,273,315,268,326,272,333,279,333,283,338,288,345,293,353,275,351,272,362,273,372,263,380,267,388,272,394,270,405,275,416,286,421,300,416,307,430,311,441,304,452,316,456,313,475,49,474" shape="poly">
-    <area alt="Blaine" title="Blaine" onclick="getData(8, 2)" coords="235,478,318,477,337,492,351,488,366,481,361,497,366,508,367,537,404,545,418,532,425,538,431,550,439,553,452,561,464,570,479,574,483,554,495,564,493,580,493,591,500,605,503,618,524,628,528,642,538,660,234,659" shape="poly">
-    <area alt="Five Creeks" title="Five Creeks" onclick="getData(8, 1)" coords="49,478,231,661" shape="rect">
-    <area alt="Exeter" title="Exeter" onclick="getData(9, 2)" coords="232,662,412,845" shape="rect">
-    <area alt="Oakland" title="Oakland" onclick="getData(9, 1)" coords="46,662,228,845" shape="rect">
-    <area alt="Union" title="Union" onclick="getData(9, 3)" coords="417,661,543,661,558,671,574,671,583,674,598,682,599,845,417,845" shape="poly">
-    <area alt="Grant" title="Grant" onclick="getData(9, 4)" coords="602,570,723,570,723,921,709,915,695,920,678,921,668,915,655,908,652,884,656,871,652,852,639,845,622,835,631,813,641,808,659,791,653,776,638,767,627,757,602,750" shape="poly">
-    <area alt="Republican" title="Republican" onclick="getData(10, 4)" coords="602,753,623,756,652,779,657,793,640,802,630,813,621,826,626,836,639,845,652,858,649,868,649,882,650,893,652,903,656,914,666,922,683,925,691,920,705,917,719,919,717,1030,570,1030,568,849,600,847" shape="poly">
-    <area alt="Gill" title="Gill" onclick="getData(10, 3)" coords="415,847,566,1031" shape="rect">
-    <area alt="Athelstane" title="Athelstane" onclick="getData(10, 2)" coords="230,848,412,1033" shape="rect">
-    <area alt="Chapman" title="Chapman" onclick="getData(10, 1)" coords="45,847,226,1033" shape="rect">
-</map>
+        function searchNumber() {
+            const township = document.getElementById("inputTownship").value
+            const range = document.getElementById("inputRange").value
+            fetch("http://localhost/ClayHistoryMuseum/CalebGlen/BackendEndpoints/searchNumber.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+                },
+                body: `tsp=${township}&rge=${range}`
+            }).then((response) => response.text())
+                .then((res) => (document.getElementById("tb").innerHTML = res))
+        }
+    </script>
+
+    <div class="d-flex justify-content-center">
+        <a href="http://localhost/app/BackendEndpoints/createData.php">
+            <button class="btn btn-primary"> add data </button>
+        </a>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <img src="clayCountyMap.jpg" usemap="#image-map">
+    </div>
+
+    <map name="image-map">
+        <area target="" alt="TSP 6, RGE 1" title="TSP 6, RGE 1" href="http://localhost/ClayHistoryMuseum/CalebGlen/map/townships/TSP6-RGE1.php"
+            coords="52,106,231,285" shape="rect">
+        <area target="" alt="TSP 6, RGE 2" title="TSP 6, RGE 2" href="http://localhost/ClayHistoryMuseum/CalebGlen/map/townships/TSP6-RGE2.php"
+            coords="237,109,413,284" shape="rect">
+        <area target="" alt="TSP 6, RGE 3" title="TSP 6, RGE 3" href="" coords="420,108,598,284" shape="rect">
+        <area target="" alt="TSP 6, RGE 4" title="TSP 6, RGE 4" href="" coords="604,108,720,284" shape="rect">
+        <area target="" alt="TSP 7, RGE 1" title="TSP 7, RGE 1" href="" coords="52,293,229,471" shape="rect">
+        <area target="" alt="TSP 7, RGE 2" title="TSP 7, RGE 2" href="" coords="236,293,412,470" shape="rect">
+        <area target="" alt="TSP 7, RGE 3" title="TSP 7, RGE 3" href="" coords="421,292,596,470" shape="rect">
+        <area target="" alt="TSP 7, RGE 4" title="TSP 7, RGE 4" href="" coords="604,291,720,471" shape="rect">
+        <area target="" alt="TSP 8, RGE 1" title="TSP 8, RGE 1" href="" coords="52,480,227,657" shape="rect">
+        <area target="" alt="TSP 8, RGE 2" title="TSP 8, RGE 2" href="" coords="236,479,412,657" shape="rect">
+        <area target="" alt="TSP 8, RGE 3" title="TSP 8, RGE 3" href="" coords="419,479,596,658" shape="rect">
+        <area target="" alt="TSP 8, RGE 4" title="TSP 8, RGE 4" href="" coords="605,475,721,659" shape="rect">
+        <area target="" alt="TSP 9, RGE 1" title="TSP 9, RGE 1" href="" coords="49,667,226,842" shape="rect">
+        <area target="" alt="TSP 9, RGE 2" title="TSP 9, RGE 2" href="" coords="236,665,409,842" shape="rect">
+        <area target="" alt="TSP 9, RGE 3" title="TSP 9, RGE 3" href="" coords="419,666,594,841" shape="rect">
+        <area target="" alt="TSP 9, RGE 4" title="TSP 9, RGE 4" href="" coords="604,664,719,842" shape="rect">
+        <area target="" alt="TSP 10, RGE 1" title="TSP 10, RGE 1" href="" coords="50,851,223,1029" shape="rect">
+        <area target="" alt="TSP 10, RGE 2" title="TSP 10, RGE 2" href="" coords="234,851,407,1027" shape="rect">
+        <area target="" alt="TSP 10, RGE 3" title="TSP 10, RGE 3" href="" coords="418,852,563,1028" shape="rect">
+        <area target="" alt="TSP 10, RGE 4" title="TSP 10, RGE 4" href="" coords="574,852,717,1030" shape="rect">
+    </map>
 
 </body>
+
 </html>
 
 <style>

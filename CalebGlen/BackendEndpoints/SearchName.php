@@ -1,11 +1,10 @@
 <?php
 
-$tsp = $_POST['tsp'];
-$rge = $_POST['rge'];
+$value = $_POST['value'];
 
 include 'C:\xampp\htdocs\ClayHistoryMuseum\CalebGlen\BackendEndpoints\connect.php';
 
-$sql = "Select * from `clay_countylanddata` where TSP='$tsp' and RGE='$rge'";
+$sql = "Select * from `clay_countylanddata` where '$value' in (Last_Name_Grantor_1, First_Name_Grantor_1, Last_Name_Grantor_2, First_Name_Grantor_2, Last_Name_Grantor_3, First_Name_Grantor_3, Last_Name_Grantee_1, First_Name_Grantee_1, Last_Name_Grantee_2, First_Name_Grantee_2)";
 $result = mysqli_query($con, $sql);
 
 if ($result) {

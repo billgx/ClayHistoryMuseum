@@ -2,10 +2,11 @@
 
 $tsp = $_POST['tsp'];
 $rge = $_POST['rge'];
+$sec = $_POST['sec'];
 
 include 'C:\xampp\htdocs\ClayHistoryMuseum\CalebGlen\BackendEndpoints\connect.php';
 
-$sql = "Select * from `clay_countylanddata` where TSP='$tsp' and RGE='$rge'";
+$sql = "Select * from `clay_countylanddata` where TSP='$tsp' and RGE='$rge' and SEC='$sec'";
 $result = mysqli_query($con, $sql);
 
 if ($result) {
